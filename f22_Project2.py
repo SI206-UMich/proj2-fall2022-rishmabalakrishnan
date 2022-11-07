@@ -49,7 +49,7 @@ def get_listings_from_search_results(html_file):
         # print(id)
         listings.append((title, cost, id))
     fh.close()
-    print(listings)
+    # print(listings)
     return listings
     # pass
 
@@ -78,7 +78,34 @@ def get_listing_information(listing_id):
         number of bedrooms
     )
     """
-    pass
+    filename = "html_files/listing_" + listing_id + ".html"
+    fh = open(filename)
+    # fhhmddr dir dir-ltr
+    soup = BeautifulSoup(fh, 'html.parser')
+    tag = soup.find("ul", class_="fhhmddr dir dir-ltr")
+    # print(tag)
+    policy_num = tag.find("span", class_="ll4r2nl dir dir-ltr").text
+    # print(policy_num)
+    if "pending" in policy_num.lower():
+        policy_num = "Pending"
+    elif "not needed" in policy_num.lower():
+        policy_num = "Exempt"
+    subtitle = soup.find("div", class_="_cv5qq4").text
+    # print(subtitle)
+    place_type = "Entire Room"
+    if "private" in subtitle.lower():
+        place_type = "Private Room"
+    elif "shared" in subtitle.lower():
+        place_type = "Shared Room"
+    # print(place_type)
+    # l7n4lsf dir dir-ltr
+    bedrooms = soup.find_all("li", class_="l7n4lsf dir dir-ltr")[1].text.strip(" ·")
+    bedrooms = int(bedrooms.split()[0])
+    # bedrooms = bedrooms.find_all("span")
+    # print(bedrooms)
+    fh.close()
+    return (policy_num, place_type, bedrooms)
+    # pass
 
 
 def get_detailed_listing_database(html_file):
@@ -179,7 +206,30 @@ class TestCases(unittest.TestCase):
         # check that the last title is correct (open the search results html and find it)
         pass
 
-    # def test_get_listing_information(self):
+    def test_get_listing_information(self):
+        # DELETE THIS BLOCK
+        # get_listing_information("724897778179485553")
+        # get_listing_information("1550913")
+        # get_listing_information("1623609")
+        # get_listing_information("1944564")
+        # get_listing_information("4616596")
+        # get_listing_information("6600081")
+        # get_listing_information("10280573")
+        # get_listing_information("11225011")
+        # get_listing_information("16204265")
+        # get_listing_information("23354077")
+        # get_listing_information("23672181")
+        # get_listing_information("28668414")
+        # get_listing_information("31057117")
+        # get_listing_information("32871760")
+        # get_listing_information("38884411")
+        # get_listing_information("41545776")
+        # get_listing_information("49043049")
+        # get_listing_information("50010586")
+        # get_listing_information("51027324")
+        # get_listing_information("51106622")
+        print(get_listing_information("724897778179485553"))
+
         # html_list = ["1623609",
                     #  "1944564",
                     #  "1550913",
@@ -205,7 +255,7 @@ class TestCases(unittest.TestCase):
 
         # check that the third listing has one bedroom
 
-        # pass
+        pass
 
     # def test_get_detailed_listing_database(self):
         # call get_detailed_listing_database on "html_files/mission_district_search_results.html"
