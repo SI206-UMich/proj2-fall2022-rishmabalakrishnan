@@ -36,13 +36,20 @@ def get_listings_from_search_results(html_file):
     # titles seem to have class t1jojoys
     # for tag in tags:
     #     print(tag, end = '\n\n')
-    print(tags[0].find("div", class_ = "t1jojoys dir dir-ltr"))
-    # for tag in tags:
-        # title = tag.find("div", class_="dir dir-ltr")
+    # div = tags[0].find("div", class_ = "t1jojoys dir dir-ltr")
+    # print(div.text)
+    for tag in tags:
+        # print(tag)
+        # print('\n\n\n')
+        title = tag.find("div", class_="t1jojoys dir dir-ltr").text
         # print(title)
-        # cost = tag.find()
-        # id = tag.find()
-        # listings.append((title, cost, id))
+        cost = int(tag.find("span", class_="_tyxjp1").text[1:])
+        # print(cost)
+        id = tag.find("a", class_="ln2bl2p dir dir-ltr").get("target").split("_")[1]
+        # print(id)
+        listings.append((title, cost, id))
+    fh.close()
+    print(listings)
     return listings
     # pass
 
