@@ -234,29 +234,6 @@ class TestCases(unittest.TestCase):
         # pass
 
     def test_get_listing_information(self):
-        # DELETE THIS BLOCK
-        # get_listing_information("724897778179485553")
-        # get_listing_information("1550913")
-        # get_listing_information("1623609")
-        # get_listing_information("1944564")
-        # get_listing_information("4616596")
-        # get_listing_information("6600081")
-        # get_listing_information("10280573")
-        # get_listing_information("11225011")
-        # get_listing_information("16204265")
-        # get_listing_information("23354077")
-        # get_listing_information("23672181")
-        # get_listing_information("28668414")
-        # get_listing_information("31057117")
-        # get_listing_information("32871760")
-        # get_listing_information("38884411")
-        # get_listing_information("41545776")
-        # get_listing_information("49043049")
-        # get_listing_information("50010586")
-        # get_listing_information("51027324")
-        # get_listing_information("51106622")
-        # print(get_listing_information("724897778179485553"))
-
         html_list = ["1623609",
                      "1944564",
                      "1550913",
@@ -277,11 +254,11 @@ class TestCases(unittest.TestCase):
             # check that the third element in the tuple is an int
             self.assertEqual(type(listing_information[2]), int)
         # check that the first listing in the html_list has policy number 'STR-0001541'
-
+        self.assertEqual(listing_informations[0][0], 'STR-0001541')
         # check that the last listing in the html_list is a "Private Room"
-
+        self.assertEqual(listing_informations[-1][1], 'Private Room')
         # check that the third listing has one bedroom
-
+        self.assertEqual(listing_informations[2][2], 1)
         # pass
 
     def test_get_detailed_listing_database(self):
