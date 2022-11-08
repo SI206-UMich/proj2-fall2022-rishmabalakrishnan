@@ -27,7 +27,6 @@ def get_listings_from_search_results(html_file):
     """
     fh = open(html_file)
     soup = BeautifulSoup(fh, 'html.parser')
-    # print(type(soup))
     listings = []
     # maybe role='group' ???
     tags = soup.find_all("div", itemprop = "itemListElement")
