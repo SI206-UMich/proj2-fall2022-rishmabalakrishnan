@@ -159,7 +159,12 @@ def write_csv(data, filename):
 
     This function should not return anything.
     """
-    pass
+    fh = open(filename, 'w')
+    fh.write("Listing Title,Cost,Listing ID,Policy Number,Place Type, Number of Bedrooms\n")
+    for tup in data:
+        fh.write(tup[0] + ',' + str(tup[1]) + ',' + tup[2] + ',' + tup[3] + ',' + tup[4] + ',' + str(tup[5]) + '\n')
+    fh.close()
+    # pass
 
 
 def check_policy_numbers(data):
@@ -288,20 +293,20 @@ class TestCases(unittest.TestCase):
 
         # pass
 
-    # def test_write_csv(self):
+    def test_write_csv(self):
         # call get_detailed_listing_database on "html_files/mission_district_search_results.html"
         # and save the result to a variable
-        # detailed_database = get_detailed_listing_database("html_files/mission_district_search_results.html")
+        detailed_database = get_detailed_listing_database("html_files/mission_district_search_results.html")
         # call write csv on the variable you saved
-        # write_csv(detailed_database, "test.csv")
+        write_csv(detailed_database, "test.csv")
         # read in the csv that you wrote
-        # csv_lines = []
-        # with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test.csv'), 'r') as f:
-            # csv_reader = csv.reader(f)
-            # for i in csv_reader:
-                # csv_lines.append(i)
+        csv_lines = []
+        with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test.csv'), 'r') as f:
+            csv_reader = csv.reader(f)
+            for i in csv_reader:
+                csv_lines.append(i)
         # check that there are 21 lines in the csv
-        # self.assertEqual(len(csv_lines), 21)
+        self.assertEqual(len(csv_lines), 21)
         # check that the header row is correct
 
         # check that the next row is Private room in Mission District,82,51027324,Pending,Private Room,1
