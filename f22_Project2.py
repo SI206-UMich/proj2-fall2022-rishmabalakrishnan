@@ -233,7 +233,6 @@ def extra_credit(listing_id):
         if val > 90:
             return False
     return True
-    # return tags
     # pass
 
 
@@ -345,7 +344,12 @@ class TestCases(unittest.TestCase):
         # pass
 
     def test_extra_credit(self):
-        print(extra_credit('16204265'))
+        under_limit1 = extra_credit('16204265')
+        self.assertEqual(type(under_limit1), bool)
+        self.assertEqual(under_limit1, False)
+        under_limit2 = extra_credit('1944564')
+        self.assertEqual(type(under_limit2), bool)
+        self.assertEqual(under_limit2, True)
 
 if __name__ == '__main__':
     database = get_detailed_listing_database("html_files/mission_district_search_results.html")
