@@ -306,7 +306,7 @@ class TestCases(unittest.TestCase):
         # check that the next row is Private room in Mission District,82,51027324,Pending,Private Room,1
         self.assertEqual(lines[1].strip(), 'Private room in Mission District,82,51027324,Pending,Private Room,1')
         # check that the last row is Apartment in Mission District,399,28668414,Pending,Entire Room,2
-
+        self.assertEqual(lines[-1].strip(), 'Apartment in Mission District,399,28668414,Pending,Entire Room,2')
         fh.close()
         # pass
 
