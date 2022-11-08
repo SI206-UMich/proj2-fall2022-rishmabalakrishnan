@@ -1,3 +1,8 @@
+# Your name: Rishma Balakrishnan
+# Your student id: 59736283
+# Your email: rishma@umich.edu
+# List who you have worked with on this project: Tyra Briscoe
+
 from xml.sax import parseString
 from bs4 import BeautifulSoup
 import re
@@ -159,8 +164,9 @@ def write_csv(data, filename):
     This function should not return anything.
     """
     fh = open(filename, 'w')
-    fh.write("Listing Title,Cost,Listing ID,Policy Number,Place Type, Number of Bedrooms\n")
-    for tup in data:
+    sorted_data = sorted(data, key = lambda t: t[1])
+    fh.write("Listing Title,Cost,Listing ID,Policy Number,Place Type,Number of Bedrooms\n")
+    for tup in sorted_data:
         fh.write(tup[0] + ',' + str(tup[1]) + ',' + tup[2] + ',' + tup[3] + ',' + tup[4] + ',' + str(tup[5]) + '\n')
     fh.close()
     # pass
@@ -294,11 +300,14 @@ class TestCases(unittest.TestCase):
         # check that there are 21 lines in the csv
         self.assertEqual(len(csv_lines), 21)
         # check that the header row is correct
-
+        fh = open("test.csv")
+        lines = fh.readlines()
+        self.assertEqual(lines[0].strip(), 'Listing Title,Cost,Listing ID,Policy Number,Place Type,Number of Bedrooms')
         # check that the next row is Private room in Mission District,82,51027324,Pending,Private Room,1
-
+        self.assertEqual(lines[1].strip(), 'Private room in Mission District,82,51027324,Pending,Private Room,1')
         # check that the last row is Apartment in Mission District,399,28668414,Pending,Entire Room,2
 
+        fh.close()
         # pass
 
     def test_check_policy_numbers(self):
