@@ -186,7 +186,15 @@ def check_policy_numbers(data):
     ]
 
     """
-    pass
+    valid_num = "20\d{2}-00\d{4}STR|STR-000\d{4}"
+    invalid_nums = []
+    for listing in data:
+        policy_num = listing[3]
+        if policy_num != "Pending" and policy_num != "Exempt":
+            if not re.search(valid_num, policy_num):
+                invalid_nums.append(policy_num)
+    return invalid_nums
+    # pass
 
 
 def extra_credit(listing_id):
@@ -315,14 +323,14 @@ class TestCases(unittest.TestCase):
 
         # pass
 
-    # def test_check_policy_numbers(self):
+    def test_check_policy_numbers(self):
         # call get_detailed_listing_database on "html_files/mission_district_search_results.html"
         # and save the result to a variable
-        # detailed_database = get_detailed_listing_database("html_files/mission_district_search_results.html")
+        detailed_database = get_detailed_listing_database("html_files/mission_district_search_results.html")
         # call check_policy_numbers on the variable created above and save the result as a variable
-        # invalid_listings = check_policy_numbers(detailed_database)
+        invalid_listings = check_policy_numbers(detailed_database)
         # check that the return value is a list
-        # self.assertEqual(type(invalid_listings), list)
+        self.assertEqual(type(invalid_listings), list)
         # check that there is exactly one element in the string
 
         # check that the element in the list is a string
